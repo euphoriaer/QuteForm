@@ -2,30 +2,107 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1815</width>
-    <height>1004</height>
+    <width>1439</width>
+    <height>868</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1815</width>
-     <height>22</height>
-    </rect>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
    </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetMaximumSize</enum>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="formTabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="tab_3">
+       <property name="minimumSize">
+        <size>
+         <width>1435</width>
+         <height>0</height>
+        </size>
+       </property>
+       <attribute name="title">
+        <string>  首页</string>
+       </attribute>
+       <layout class="QFormLayout" name="formLayout">
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>PushButton</string>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <action name="FormAdd">
+   <property name="icon">
+    <iconset resource="../Resources/icons/Icons.qrc">
+     <normaloff>:/Icons/System/add-line.svg</normaloff>:/Icons/System/add-line.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Add</string>
+   </property>
+  </action>
+  <action name="actionAddPage">
+   <property name="icon">
+    <iconset resource="../Resources/icons/Icons.qrc">
+     <normaloff>:/Icons/Device/battery-charge-fill.svg</normaloff>:/Icons/Device/battery-charge-fill.svg</iconset>
+   </property>
+   <property name="text">
+    <string>AddPage</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../Resources/icons/Icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

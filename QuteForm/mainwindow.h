@@ -13,7 +13,13 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    void OnBtnClicked(void);
     ~MainWindow();
+
+private slots:
+    void on_formTabWidget_tabCloseRequested(int index);
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
