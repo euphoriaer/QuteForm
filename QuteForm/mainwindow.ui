@@ -28,26 +28,8 @@
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="spacing">
-     <number>0</number>
-    </property>
-    <property name="sizeConstraint">
-     <enum>QLayout::SetMaximumSize</enum>
-    </property>
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
-    <item>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
      <widget class="QTabWidget" name="formTabWidget">
       <property name="font">
        <font>
@@ -70,18 +52,35 @@
        <attribute name="title">
         <string>  首页</string>
        </attribute>
-       <layout class="QFormLayout" name="formLayout">
-        <item row="0" column="0">
-         <widget class="QPushButton" name="pushButton">
-          <property name="text">
-           <string>PushButton</string>
-          </property>
-          <property name="flat">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QPushButton" name="CreateDataButton">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>250</y>
+          <width>128</width>
+          <height>32</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>创建数据库</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="OpenDataDBButton">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>529</y>
+          <width>128</width>
+          <height>32</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>打开数据库</string>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -106,10 +105,6 @@
    </property>
   </action>
  </widget>
- <tabstops>
-  <tabstop>formTabWidget</tabstop>
-  <tabstop>pushButton</tabstop>
- </tabstops>
  <resources>
   <include location="../Resources/icons/Icons.qrc"/>
  </resources>
