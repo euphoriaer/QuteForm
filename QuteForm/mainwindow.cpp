@@ -3,6 +3,7 @@
 #include "formwindow.h"
 #include <QFileDialog>
 
+#include <QMouseEvent>
 #include <QPushButton>
 
 
@@ -13,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //this->setWindowFlags(Qt::FramelessWindowHint  ); // 去掉标题栏,去掉任务栏显示
+    this->setWindowFlags(Qt::FramelessWindowHint  ); // 去掉标题栏,去掉任务栏显示
     //增加加号按钮
 
     QIcon* Icon=new  QIcon();
@@ -27,13 +28,13 @@ MainWindow::MainWindow(QWidget *parent)
     tabButton->setIcon(QIcon(":/Icons/System/close-fill.svg"));
     tabButton->setIconSize(QSize(48,48));
 
-     tabButton->connect(tabButton,&QPushButton::clicked, this,&MainWindow::OnBtnClicked);
-     ui->formTabWidget->setCornerWidget(tabButton);
+    tabButton->connect(tabButton,&QPushButton::clicked, this,&MainWindow::OnBtnClicked);
+    ui->formTabWidget->setCornerWidget(tabButton);
 
-     //添加首页
+    //添加首页
 
 
-     //初始化DB
+    //初始化DB
 
 
 }
@@ -112,20 +113,63 @@ void MainWindow::on_CreateDataButton_clicked()
     }
     else
     {
-         //Qstring 重载+ 不是更好
+        //Qstring 重载+ 不是更好
 
-         QSqlDatabase  dataBase=QSqlDatabase::addDatabase("QSQLITE");
-         dataBase.setDatabaseName(filePath);
-         if(dataBase.open()==true)
-         {
-             qDebug()<<filePath.prepend("Create Db Sucess!");
-         }else
-         {
-             qDebug()<<filePath.prepend("Create Db Fail");
-         }
+        QSqlDatabase  dataBase=QSqlDatabase::addDatabase("QSQLITE");
+        dataBase.setDatabaseName(filePath);
+        if(dataBase.open()==true)
+        {
+            qDebug()<<filePath.prepend("Create Db Sucess!");
+        }else
+        {
+            qDebug()<<filePath.prepend("Create Db Fail");
+        }
 
     }
 }
+
+
+/*
+ * 鼠标按下操作
+ * 记录当前坐标
+ */
+static QPoint last(0,0);        //保存坐标
+const int TITLE_HEIGHT = 50;    //这里也可以使用宏定义，保存标题高度，也就是鼠标点击区域的高度
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+
+    if(event->y()<TITLE_HEIGHT)
+    {
+        last = event->globalPos();
+    }
+}
+/*
+ * 鼠标移动函数
+ * 这里实时修改窗口的坐标
+ */
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+    if(event->y()<TITLE_HEIGHT)
+    {
+        int dx = event->globalX() - last.x();
+        int dy = event->globalY() - last.y();
+        last = event->globalPos();
+        this->move(this->x()+dx,this->y()+dy);
+    }
+}
+/*
+ * 鼠标释放函数
+ */
+void MainWindow::mouseReleaseEvent(QMouseEvent *event)
+{
+    if(event->y()<TITLE_HEIGHT)
+    {
+        int dx = event->globalX() - last.x();
+        int dy = event->globalY() - last.y();
+        this->move(this->x()+dx,this->y()+dy);
+    }
+}
+
 //初始化数据库
 void MainWindow::DataInit()
 {

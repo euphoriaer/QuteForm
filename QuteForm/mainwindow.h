@@ -25,6 +25,13 @@ private slots:
 
     void on_CreateDataButton_clicked();
 
+    //鼠标按下
+    void mousePressEvent(QMouseEvent* event);
+    //鼠标移动
+    void mouseMoveEvent(QMouseEvent* event);
+    //鼠标释放
+    void mouseReleaseEvent(QMouseEvent* event);
+
 private:
     Ui::MainWindow *ui;
     void    DataInit();
