@@ -14,6 +14,9 @@ FormWindow::FormWindow(QWidget *parent,QString filePath) :
     ui->setupUi(this);
     qDebug()<<"DbFilePath  :"<<filePath;
     DbInit(filePath);
+
+    //todo 选择打开哪个表
+
     ShowTabel();
 }
 
@@ -22,7 +25,7 @@ FormWindow::~FormWindow()
     delete ui;
 }
 
-void FormWindow::DbInit(QString filePath)
+QStringList FormWindow::DbInit(QString filePath)
 {
     db=QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(filePath);
@@ -30,7 +33,7 @@ void FormWindow::DbInit(QString filePath)
     if(db.open()==true)
     {
         qDebug()<<QStringLiteral("创建数据库成功");
-
+        return  db.tables();
     }else
     {
         qDebug()<<"创建/打开数据库成功失败";
@@ -40,15 +43,36 @@ void FormWindow::DbInit(QString filePath)
 void FormWindow::ShowTabel()
 {
 
-    QString str=QString("SELECT * FROM buff;");
+    //dbModel
+    //   QString str=QString("SELECT * FROM buff;");
+    //    dbModel->setQuery(str);
+    //    ui->tableView->setModel(dbModel);
 
-    dbModel->setQuery(str);
-    ui->tableView->setModel(dbModel);
+    QSqlTableModel *model = new QSqlTableModel;
+    model->setTable("buff");
+    model->select();
 
+    QTableView *view =ui->tableView;
+    view->setModel(model);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    view->show();
 }
 
 
 void FormWindow::on_actExportJson_triggered()
+{
+    //DbmodelExport();
+    TableModelExport();
+
+
+}
+
+void FormWindow::TableModelExport()
+{
+
+}
+
+void FormWindow::DbmodelExport()
 {
     //按下导出，导出表  //error 导出可被插件重写
     QString title="导出Json表";
@@ -81,14 +105,6 @@ void FormWindow::on_actExportJson_triggered()
             auto  value=dbModel->data(dbModel->index(row,col));
             curColDic.insert(key,value.toString());//每次插入向前
         }
-
-//        for (int col = dbModel->columnCount()-1; col >0;col--)
-//        {
-//            auto  key=titles[col];
-//            auto  value=dbModel->data(dbModel->index(row,col));
-//            curColDic.insert(key,value.toString());//每次插入向前,但数据从后 ?emmm  变成从顺序加入了？
-//        }
-
         jObject.insert(rowKey.toString(),curColDic);
     }
 
@@ -101,6 +117,20 @@ void FormWindow::on_actExportJson_triggered()
     QTextStream write(&file);
     write<< json.toJson();//写入
     file.close();
+
+}
+
+
+void FormWindow::on_actionAddRow_triggered()
+{
+    //直接增加一行空数据，View 填写即可
+}
+
+
+void FormWindow::on_actionCol_triggered()
+{
+    //增加列，弹出对话框，列名
+
 
 }
 

@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     QIcon* Icon=new  QIcon();
     Icon->addFile("");
 
-    FormWindow* plusTab=new  FormWindow(this);
+
 
     //todo 将最大 最小化，关闭三个按钮加入右侧,需要加入多个按钮，目前只有退出，没有放大与缩小
     QPushButton* tabButton = new QPushButton();
