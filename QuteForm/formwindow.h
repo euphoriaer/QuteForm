@@ -24,9 +24,9 @@ public :
     void    DbInit();
     void    CreateTable();
     void    QueryTable();
-    void   ShowTabel();
     QStringList DbInit(QString filePath);
-
+    void  DoubleClikTitle(int index);
+    void ShowTabel(QString tableName);
 private slots:
     void on_actExportJson_triggered();
 
@@ -34,14 +34,18 @@ private slots:
 
     void on_actionCol_triggered();
 
+    void on_tableView_doubleClicked(const QModelIndex &index);
+
+    void on_RefreshAction_triggered();
+
 private:
     Ui::FormWindow *ui;
     QSqlDatabase db;
     QSqlQueryModel*  dbModel=new  QSqlQueryModel();
-    QSqlTableModel* tbleModel=new  QSqlTableModel();
+    QSqlTableModel* tableModel=new  QSqlTableModel();
     QSqlRelationalTableModel* tableRelationalModel=new  QSqlRelationalTableModel();
     void    DbmodelExport();
-    void TableModelExport();
+    QString curTableName;
 };
 
 #endif // FORMWINDOW_H

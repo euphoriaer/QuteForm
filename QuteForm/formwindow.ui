@@ -36,7 +36,7 @@
        <bool>false</bool>
       </property>
       <property name="editTriggers">
-       <set>QAbstractItemView::AllEditTriggers</set>
+       <set>QAbstractItemView::CurrentChanged|QAbstractItemView::DoubleClicked</set>
       </property>
       <property name="dragDropMode">
        <enum>QAbstractItemView::DragOnly</enum>
@@ -71,9 +71,11 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actExportJson"/>
+   <addaction name="exportScriptaction"/>
    <addaction name="actionAddRow"/>
    <addaction name="actionCol"/>
    <addaction name="actionAddForm"/>
+   <addaction name="RefreshAction"/>
   </widget>
   <action name="actExportJson">
    <property name="icon">
@@ -124,6 +126,34 @@
    </property>
    <property name="text">
     <string>增加表</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="RefreshAction">
+   <property name="icon">
+    <iconset resource="../Resources/icons/Icons.qrc">
+     <normaloff>:/Icons/System/loader-3-line.svg</normaloff>:/Icons/System/loader-3-line.svg</iconset>
+   </property>
+   <property name="text">
+    <string>刷新</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="exportScriptaction">
+   <property name="icon">
+    <iconset resource="../Resources/icons/Icons.qrc">
+     <normaloff>:/Icons/Document/bill-line.svg</normaloff>:/Icons/Document/bill-line.svg</iconset>
+   </property>
+   <property name="text">
+    <string>导出脚本文件</string>
    </property>
    <property name="font">
     <font>

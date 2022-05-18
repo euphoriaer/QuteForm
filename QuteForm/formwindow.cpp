@@ -2,10 +2,15 @@
 #include "ui_formwindow.h"
 
 #include <QFileDialog>
+#include <QFontComboBox>
+#include <QHeaderView>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QList>
+#include <QTableView>
+#include <hintdialog.h>
+
 
 FormWindow::FormWindow(QWidget *parent,QString filePath) :
       QMainWindow(parent),
@@ -16,13 +21,26 @@ FormWindow::FormWindow(QWidget *parent,QString filePath) :
     DbInit(filePath);
 
     //todo 选择打开哪个表
+    curTableName="buff";
+    ShowTabel(curTableName);
 
-    ShowTabel();
+    //设置表头事件，点击双击表头弹出提示
+    auto tableHand= ui->tableView->horizontalHeader();
+    tableHand->connect(tableHand,&QHeaderView::sectionDoubleClicked ,this,&FormWindow::DoubleClikTitle);
+
 }
 
-FormWindow::~FormWindow()
+
+
+void FormWindow::DoubleClikTitle(int index)
 {
-    delete ui;
+    qDebug()<<"Enter titel:   "<< index;
+    //弹出提示  提示存在数据库里   需自定义弹出控件，且Setmodel
+    HintDialog* dialog=new HintDialog(this ,tableModel,curTableName,index);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    auto flags=dialog->windowFlags();
+    dialog->setWindowFlags(flags|Qt::WindowStaysOnTopHint);
+    dialog->show();
 }
 
 QStringList FormWindow::DbInit(QString filePath)
@@ -32,7 +50,7 @@ QStringList FormWindow::DbInit(QString filePath)
 
     if(db.open()==true)
     {
-        qDebug()<<QStringLiteral("创建数据库成功");
+        qDebug()<<QStringLiteral("创建/打开数据库成功");
         return  db.tables();
     }else
     {
@@ -40,7 +58,7 @@ QStringList FormWindow::DbInit(QString filePath)
     }
 }
 
-void FormWindow::ShowTabel()
+void FormWindow::ShowTabel(QString tableName)
 {
 
     //dbModel
@@ -48,27 +66,21 @@ void FormWindow::ShowTabel()
     //    dbModel->setQuery(str);
     //    ui->tableView->setModel(dbModel);
 
-    QSqlTableModel *model = new QSqlTableModel;
-    model->setTable("buff");
-    model->select();
+    tableModel = new  QSqlTableModel;
+    tableModel->setTable(tableName);
+    tableModel->select();
 
     QTableView *view =ui->tableView;
-    view->setModel(model);
+    view->setModel(tableModel);
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     view->show();
+
 }
 
 
 void FormWindow::on_actExportJson_triggered()
 {
-    //DbmodelExport();
-    TableModelExport();
 
-
-}
-
-void FormWindow::TableModelExport()
-{
 
 }
 
@@ -130,6 +142,27 @@ void FormWindow::on_actionAddRow_triggered()
 void FormWindow::on_actionCol_triggered()
 {
     //增加列，弹出对话框，列名
+
+
+}
+
+
+void FormWindow::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    qDebug()<<"Enter Press  :"<<index.data().toString();
+}
+FormWindow::~FormWindow()
+{
+    delete ui;
+}
+
+
+void FormWindow::on_RefreshAction_triggered()
+{
+    //刷新表格数据  多人协作模块需要，当使用远程数据库时
+
+   //刷新数据表格  Git多人协作时需要，刷新本地Db文件，拉取重读
+    tableModel->select();
 
 
 }

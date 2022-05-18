@@ -11,16 +11,19 @@ CONFIG += c++11
 SOURCES += \
     basewidget.cpp \
     formwindow.cpp \
+    hintdialog.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     basewidget.h \
     formwindow.h \
+    hintdialog.h \
     mainwindow.h
 
 FORMS += \
     formwindow.ui \
+    hintdialog.ui \
     mainwindow.ui
 
 TRANSLATIONS += \
