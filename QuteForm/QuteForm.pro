@@ -2,4 +2,5 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     Main \
-    Main/Main.pro
+    Main/Main.pro \
+    Plugs
