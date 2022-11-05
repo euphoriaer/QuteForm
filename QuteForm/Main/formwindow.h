@@ -25,8 +25,8 @@ public :
     void    CreateTable();
     void    QueryTable();
     QStringList DbInit(QString filePath);
-    void  DoubleClikTitle(int index);
-    void ShowTabel(QString tableName);
+    void    DoubleClikTitle(int index);
+    void    ShowTabel(QString tableName);
 private slots:
     void on_actExportJson_triggered();
 

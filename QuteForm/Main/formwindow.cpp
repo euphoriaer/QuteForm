@@ -1,6 +1,5 @@
 ﻿#include "formwindow.h"
 #include "ui_formwindow.h"
-
 #include <QFileDialog>
 #include <QFontComboBox>
 #include <QHeaderView>
@@ -136,6 +135,11 @@ void FormWindow::DbmodelExport()
 void FormWindow::on_actionAddRow_triggered()
 {
     //直接增加一行空数据，View 填写即可
+    qDebug("Add Test");
+
+
+
+
 }
 
 
