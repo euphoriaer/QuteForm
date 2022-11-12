@@ -1,16 +1,20 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "formwindow.h"
-#include <QFileDialog>
 
+
+#include <QFileDialog>
 #include <QMouseEvent>
 #include <QPushButton>
+#include <plugmanager.h>
+#include <qpluginloader.h>
+
 
 
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-      , ui(new Ui::MainWindow)
+    , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
@@ -174,5 +178,51 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 void MainWindow::DataInit()
 {
 
+}
+
+
+void MainWindow::on_PluginsManager_clicked()
+{
+    //插件管理器
+    auto isLoad= LoadPlugInsManager();
+    if(isLoad)
+    {
+        qDebug("插件管理器载入成功！");
+        auto reStr= pluginsMgr->ShowMgrPanel("插件测试");
+        qDebug("插件测试完成",reStr.data());
+    }else
+    {
+        qDebug("错误的插件管理器！");
+    }
+
+}
+
+bool MainWindow::LoadPlugInsManager()
+{
+    QDir pluginsDir(QCoreApplication::applicationDirPath());
+//#if defined(Q_OS_WIN)
+//    if (pluginsDir.dirName().toLower() == "debug" || pluginsDir.dirName().toLower() == "release")
+//        pluginsDir.cdUp();
+//#elif defined(Q_OS_MAC)
+//    if (pluginsDir.dirName() == "MacOS") {
+//        pluginsDir.cdUp();
+//        pluginsDir.cdUp();
+//        pluginsDir.cdUp();
+//    }
+//#endif
+    pluginsDir.cd("plugins");
+    const QStringList entries = pluginsDir.entryList(QDir::Files);
+    for (const QString &fileName : entries) {
+        QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
+        QObject *plugin = pluginLoader.instance();
+        if (plugin) {
+            pluginsMgr = qobject_cast<PluginsInterface *>(plugin);
+            if (pluginsMgr)
+                return true;
+            pluginLoader.unload();
+        }
+    }
+
+    return false;
 }
 

@@ -1,8 +1,10 @@
 ﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <PluginsInterface.h>
 #include <QMainWindow>
 #include <QSqlDatabase>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -16,6 +18,8 @@ public:
     void OnBtnClicked(void);
     ~MainWindow();
 
+    bool LoadPlugInsManager();
+    PluginsInterface* pluginsMgr;
 private slots:
     void on_formTabWidget_tabCloseRequested(int index);
 
@@ -31,6 +35,8 @@ private slots:
     void mouseMoveEvent(QMouseEvent* event);
     //鼠标释放
     void mouseReleaseEvent(QMouseEvent* event);
+
+    void on_PluginsManager_clicked();
 
 private:
     Ui::MainWindow *ui;

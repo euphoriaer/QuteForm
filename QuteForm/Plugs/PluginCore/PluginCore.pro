@@ -1,6 +1,7 @@
-QT       += core gui
+QT -= gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+TEMPLATE = lib
+DEFINES += PLUGINCORE_LIBRARY
 
 CONFIG += c++17
 
@@ -11,16 +12,13 @@ CONFIG += c++17
 INCLUDEPATH  += ../../Main
 
 SOURCES += \
-    main.cpp \
-    plugmanager.cpp
+    plugincore.cpp
 
 HEADERS += \
-    plugmanager.h
-
-FORMS += \
-    plugmanager.ui
+    plugincore.h
 
 # Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
+unix {
+    target.path = /usr/lib
+}
 !isEmpty(target.path): INSTALLS += target
