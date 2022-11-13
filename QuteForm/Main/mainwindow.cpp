@@ -6,7 +6,6 @@
 #include <QFileDialog>
 #include <QMouseEvent>
 #include <QPushButton>
-#include <plugmanager.h>
 #include <qpluginloader.h>
 
 
@@ -200,17 +199,11 @@ void MainWindow::on_PluginsManager_clicked()
 bool MainWindow::LoadPlugInsManager()
 {
     QDir pluginsDir(QCoreApplication::applicationDirPath());
-//#if defined(Q_OS_WIN)
-//    if (pluginsDir.dirName().toLower() == "debug" || pluginsDir.dirName().toLower() == "release")
-//        pluginsDir.cdUp();
-//#elif defined(Q_OS_MAC)
-//    if (pluginsDir.dirName() == "MacOS") {
-//        pluginsDir.cdUp();
-//        pluginsDir.cdUp();
-//        pluginsDir.cdUp();
-//    }
-//#endif
+
+
     pluginsDir.cd("plugins");
+
+
     const QStringList entries = pluginsDir.entryList(QDir::Files);
     for (const QString &fileName : entries) {
         QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));

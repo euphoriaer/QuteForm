@@ -2,7 +2,6 @@
 #define PLUGMANAGER_H
 
 #include <QMainWindow>
-#include "PluginsInterface.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class PlugManager; }

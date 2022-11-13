@@ -2,7 +2,7 @@ QT -= gui
 
 TEMPLATE = lib
 DEFINES += PLUGINCORE_LIBRARY
-
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++17
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -12,13 +12,18 @@ CONFIG += c++17
 INCLUDEPATH  += ../../Main
 
 SOURCES += \
-    plugincore.cpp
+    plugincore.cpp \
+    plugmanager.cpp
 
 HEADERS += \
-    plugincore.h
+    plugincore.h \
+    plugmanager.h
 
 # Default rules for deployment.
 unix {
     target.path = /usr/lib
 }
 !isEmpty(target.path): INSTALLS += target
+
+FORMS += \
+    plugmanager.ui
