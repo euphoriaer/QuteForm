@@ -15,19 +15,22 @@ SOURCES += \
     formwindow.cpp \
     hintdialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    tip.cpp
 
 HEADERS += \
-    PluginsInterface.h \
+    pluginsInterface.h \
     basewidget.h \
     formwindow.h \
     hintdialog.h \
-    mainwindow.h
+    mainwindow.h \
+    tip.h
 
 FORMS += \
     formwindow.ui \
     hintdialog.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    tip.ui
 
 TRANSLATIONS += \
     QuteForm_zh_CN.ts

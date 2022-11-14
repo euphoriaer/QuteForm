@@ -1,13 +1,13 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "formwindow.h"
+#include "tip.h"
 
 
 #include <QFileDialog>
 #include <QMouseEvent>
 #include <QPushButton>
 #include <qpluginloader.h>
-
 
 
 
@@ -187,10 +187,12 @@ void MainWindow::on_PluginsManager_clicked()
     if(isLoad)
     {
         qDebug("插件管理器载入成功！");
+        Tip::ShowMessage("插件管理器载入成功！");
         auto reStr= pluginsMgr->ShowMgrPanel("插件测试");
         qDebug("插件测试完成",reStr.data());
     }else
     {
+        Tip::ShowMessage("错误的插件管理器！");
         qDebug("错误的插件管理器！");
     }
 

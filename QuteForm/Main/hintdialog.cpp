@@ -19,7 +19,7 @@ HintDialog::HintDialog(QWidget *parent,QSqlTableModel* sqlModel,QString tableNam
     tipsColName= textSqlModel->headerData(col,Qt::Orientation::Horizontal).toString();
 
     //auto test= textSqlModel->record();
-    curRecord=textSqlModel->record(0);
+   curRecord=textSqlModel->record(0);
    auto tipsContent =curRecord.value(tipsColName).toString();
    ui->textEdit->append(tipsContent);
    ui->tableView->setModel(textSqlModel);
