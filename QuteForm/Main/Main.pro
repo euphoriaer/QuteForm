@@ -37,6 +37,9 @@ TRANSLATIONS += \
 CONFIG += lrelease
 CONFIG += embed_translations
 
+DESTDIR += ../../Build/Generate #目标路径
+TARGET = QuteForm  #软件名
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

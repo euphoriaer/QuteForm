@@ -25,5 +25,8 @@ unix {
 }
 !isEmpty(target.path): INSTALLS += target
 
+DESTDIR += ../../../Build/Generate/plugins #目标路径
+TARGET = PluginsManager  #软件名
+
 FORMS += \
     plugmanager.ui
