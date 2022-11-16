@@ -12,6 +12,7 @@ INCLUDEPATH    += ../Plugs/PlugManager
 
 SOURCES += \
     basewidget.cpp \
+    datamanager.cpp \
     formwindow.cpp \
     hintdialog.cpp \
     main.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
     tip.cpp
 
 HEADERS += \
+    datamanager.h \
     pluginsInterface.h \
     basewidget.h \
     formwindow.h \
@@ -27,6 +29,7 @@ HEADERS += \
     tip.h
 
 FORMS += \
+    datamanager.ui \
     formwindow.ui \
     hintdialog.ui \
     mainwindow.ui \

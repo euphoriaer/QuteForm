@@ -5,6 +5,7 @@
 
 
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QMouseEvent>
 #include <QPushButton>
 #include <qpluginloader.h>
@@ -89,7 +90,12 @@ void MainWindow::on_OpenDataDBButton_clicked()
     }else
     {
 
+
+        //打开数据表管理界面
+
+
         //读取数据表
+
 
 
         //创建form
@@ -187,13 +193,12 @@ void MainWindow::on_PluginsManager_clicked()
     if(isLoad)
     {
         qDebug("插件管理器载入成功！");
-        Tip::ShowMessage("插件管理器载入成功！");
         auto reStr= pluginsMgr->ShowMgrPanel("插件测试");
         qDebug("插件测试完成",reStr.data());
     }else
     {
-        Tip::ShowMessage("错误的插件管理器！");
-        qDebug("错误的插件管理器！");
+       auto result=QMessageBox::warning(this,"警告","插件管理器错误！");
+       qDebug("错误的插件管理器！");
     }
 
 }
