@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1457</width>
+    <width>1463</width>
     <height>868</height>
    </rect>
   </property>
@@ -86,7 +86,7 @@
          </property>
         </widget>
        </widget>
-       <widget class="QSplitter" name="splitter_2">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>150</x>
@@ -95,12 +95,26 @@
           <height>801</height>
          </rect>
         </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <widget class="QListView" name="listView_2"/>
-        <widget class="QListView" name="listView_3"/>
-        <widget class="QListView" name="listView"/>
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,5,1">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="sizeConstraint">
+          <enum>QLayout::SetNoConstraint</enum>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QListView" name="funcList"/>
+         </item>
+         <item>
+          <widget class="QListView" name="listView_3"/>
+         </item>
+         <item>
+          <widget class="QListView" name="formList"/>
+         </item>
+        </layout>
        </widget>
       </widget>
      </widget>

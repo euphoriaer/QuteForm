@@ -20,6 +20,8 @@ public:
 
     bool LoadPlugInsManager();
     PluginsInterface* pluginsMgr;
+    QStringList DbInit(QString filePath);
+    QSqlDatabase db;
 private slots:
     void on_formTabWidget_tabCloseRequested(int index);
 

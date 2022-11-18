@@ -5,6 +5,7 @@
 
 
 #include <QFileDialog>
+#include <QList>
 #include <QMessageBox>
 #include <QMouseEvent>
 #include <QPushButton>
@@ -74,6 +75,20 @@ void MainWindow::on_pushButton_clicked()
 
 }
 
+QStringList MainWindow::DbInit(QString filePath)
+{
+    db=QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(filePath);
+
+    if(db.open()==true)
+    {
+        qDebug()<<QStringLiteral("创建/打开数据库成功");
+        return  db.tables();
+    }else
+    {
+        qDebug()<<"创建/打开数据库成功失败";
+    }
+}
 
 void MainWindow::on_OpenDataDBButton_clicked()
 {
@@ -91,10 +106,21 @@ void MainWindow::on_OpenDataDBButton_clicked()
     {
 
 
-        //打开数据表管理界面
+        //查询数据表所有表格，并显示在list区域
+        auto tableList=   DbInit(filePath);
+        QList<QString> list=QList<QString>();
+        QList<QAction*> tableListAction=QList<QAction*>();
+        for (int var = 0; var < tableList.count(); ++var)
+        {
+            auto curTableName=tableList[var];
+            QAction *cellAction=new QAction(curTableName,this);
+            tableListAction.append(cellAction);
+            this->ui->formList->addActions(tableListAction);
+        }
 
 
-        //读取数据表
+
+
 
 
 
@@ -197,8 +223,8 @@ void MainWindow::on_PluginsManager_clicked()
         qDebug("插件测试完成",reStr.data());
     }else
     {
-       auto result=QMessageBox::warning(this,"警告","插件管理器错误！");
-       qDebug("错误的插件管理器！");
+        auto result=QMessageBox::warning(this,"警告","插件管理器错误！");
+        qDebug("错误的插件管理器！");
     }
 
 }
