@@ -17,7 +17,7 @@ class FormWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit FormWindow(QWidget *parent = nullptr,QString dbFilePath=nullptr);
+    explicit FormWindow(QWidget *parent = nullptr,QSqlTableModel *dbFilePath=nullptr);
 
     ~FormWindow();
 public :
@@ -25,7 +25,7 @@ public :
     void    CreateTable();
     void    QueryTable();
     void    DoubleClikTitle(int index);
-    void    ShowTabel(QString tableName);
+    void    ShowTabel();
     QStringList DbInit(QString filePath);
 private slots:
     void on_actExportJson_triggered();

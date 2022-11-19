@@ -11,17 +11,16 @@
 #include <hintdialog.h>
 
 
-FormWindow::FormWindow(QWidget *parent,QString filePath) :
+FormWindow::FormWindow(QWidget *parent,QSqlTableModel *sqlTable) :
       QMainWindow(parent),
       ui(new Ui::FormWindow)
 {
     ui->setupUi(this);
-    qDebug()<<"DbFilePath  :"<<filePath;
-    DbInit(filePath);
 
-    //todo 选择打开哪个表
-    curTableName="buff";
-    ShowTabel(curTableName);
+    tableModel=sqlTable;
+
+
+    ShowTabel();
 
     //设置表头事件，点击双击表头弹出提示
     auto tableHand= ui->tableView->horizontalHeader();
@@ -42,31 +41,18 @@ void FormWindow::DoubleClikTitle(int index)
     dialog->show();
 }
 
-QStringList FormWindow::DbInit(QString filePath)
-{
-    db=QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(filePath);
 
-    if(db.open()==true)
-    {
-        qDebug()<<QStringLiteral("创建/打开数据库成功");
-        return  db.tables();
-    }else
-    {
-        qDebug()<<"创建/打开数据库成功失败";
-    }
-}
 
-void FormWindow::ShowTabel(QString tableName)
+void FormWindow::ShowTabel()
 {
 
-    //dbModel
-    //   QString str=QString("SELECT * FROM buff;");
-    //    dbModel->setQuery(str);
-    //    ui->tableView->setModel(dbModel);
 
-    tableModel = new  QSqlTableModel;
-    tableModel->setTable(tableName);
+//   QString str=QString("SELECT * FROM buff;");
+//   dbModel->setQuery(str);
+//    ui->tableView->setModel(dbModel);
+
+//    tableModel =&curTableModel;
+
     tableModel->select();
 
     QTableView *view =ui->tableView;

@@ -95,7 +95,7 @@
           <height>801</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,5,1">
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,3,1">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -106,32 +106,78 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QListView" name="funcList">
+          <widget class="QListWidget" name="funcList">
            <property name="contextMenuPolicy">
             <enum>Qt::CustomContextMenu</enum>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="listView_3"/>
+          <widget class="QStackedWidget" name="stackedWidget">
+           <property name="contextMenuPolicy">
+            <enum>Qt::CustomContextMenu</enum>
+           </property>
+           <widget class="QWidget" name="page"/>
+           <widget class="QWidget" name="page_2"/>
+          </widget>
          </item>
          <item>
-          <widget class="QListView" name="formList"/>
+          <widget class="QListView" name="formList">
+           <property name="contextMenuPolicy">
+            <enum>Qt::CustomContextMenu</enum>
+           </property>
+          </widget>
          </item>
         </layout>
+        <zorder>funcList</zorder>
+        <zorder>stackedWidget</zorder>
+        <zorder>formList</zorder>
        </widget>
       </widget>
      </widget>
     </item>
    </layout>
   </widget>
-  <action name="FormAdd">
+  <action name="formAdd">
    <property name="icon">
     <iconset resource="../Resources/icons/Icons.qrc">
      <normaloff>:/Icons/System/add-line.svg</normaloff>:/Icons/System/add-line.svg</iconset>
    </property>
    <property name="text">
-    <string>Add</string>
+    <string>添加表</string>
+   </property>
+   <property name="toolTip">
+    <string>添加表</string>
+   </property>
+  </action>
+  <action name="deleteFormAction">
+   <property name="icon">
+    <iconset resource="../Resources/icons/Icons.qrc">
+     <normaloff>:/Icons/System/delete-bin-2-line.svg</normaloff>:/Icons/System/delete-bin-2-line.svg</iconset>
+   </property>
+   <property name="text">
+    <string>删除表</string>
+   </property>
+   <property name="toolTip">
+    <string>删除表</string>
+   </property>
+  </action>
+  <action name="copyAction">
+   <property name="icon">
+    <iconset resource="../Resources/icons/Icons.qrc">
+     <normaloff>:/Icons/Document/file-copy-2-fill.svg</normaloff>:/Icons/Document/file-copy-2-fill.svg</iconset>
+   </property>
+   <property name="text">
+    <string>复制表</string>
+   </property>
+  </action>
+  <action name="testAction">
+   <property name="icon">
+    <iconset resource="../Resources/icons/Icons.qrc">
+     <normaloff>:/Icons/Health/test-tube-fill.svg</normaloff>:/Icons/Health/test-tube-fill.svg</iconset>
+   </property>
+   <property name="text">
+    <string>测试Action</string>
    </property>
   </action>
  </widget>

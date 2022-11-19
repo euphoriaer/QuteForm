@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <PluginsInterface.h>
+#include <QLabel>
 #include <QMainWindow>
 #include <QSqlDatabase>
 
@@ -22,6 +23,8 @@ public:
     PluginsInterface* pluginsMgr;
     QStringList DbInit(QString filePath);
     QSqlDatabase db;
+    QSqlDatabase* dbPtr=nullptr;
+
 private slots:
     void on_formTabWidget_tabCloseRequested(int index);
 
@@ -42,7 +45,15 @@ private slots:
 
     void on_funcList_customContextMenuRequested(const QPoint &pos);
 
-    void on_FormAdd_triggered();
+    void on_deleteFormAction_triggered();
+
+    void on_copyAction_triggered();
+
+    void on_formAdd_triggered();
+
+    void on_formList_customContextMenuRequested(const QPoint &pos);
+
+    void on_stackedWidget_customContextMenuRequested(const QPoint &pos);
 
 private:
     Ui::MainWindow *ui;

@@ -10,6 +10,7 @@
 #include <QMessageBox>
 #include <QMouseEvent>
 #include <QPushButton>
+#include <QSqlQuery>
 #include <qpluginloader.h>
 
 
@@ -37,11 +38,10 @@ MainWindow::MainWindow(QWidget *parent)
     tabButton->connect(tabButton,&QPushButton::clicked, this,&MainWindow::OnBtnClicked);
     ui->formTabWidget->setCornerWidget(tabButton);
 
-    //添加首页
-
-
-    //初始化DB
-
+    //首页
+    ui->funcList->insertItem(0,tr("最近"));
+    ui->funcList->insertItem(1,tr("星标"));
+    //ui->funcList->insertItem(2,ui->testAction);
 
 }
 // 绑定的响应函数
@@ -81,14 +81,15 @@ QStringList MainWindow::DbInit(QString filePath)
     db=QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(filePath);
 
-    if(db.open()==true)
-    {
-        qDebug()<<QStringLiteral("创建/打开数据库成功");
-        return  db.tables();
-    }else
+    if(db.open()==false)
     {
         qDebug()<<"创建/打开数据库成功失败";
+        return QStringList();
     }
+    qDebug()<<QStringLiteral("创建/打开数据库成功");
+    dbPtr=&db;
+    auto tables=db.tables();
+    return  tables;
 }
 
 void MainWindow::on_OpenDataDBButton_clicked()
@@ -106,7 +107,7 @@ void MainWindow::on_OpenDataDBButton_clicked()
     }else
     {
         //查询数据表所有表格，并显示在list区域
-        auto tableList=   DbInit(filePath);
+        auto tableList=DbInit(filePath);
         QList<QString> list=QList<QString>();
         QList<QAction*> tableListAction=QList<QAction*>();
         for (int var = 0; var < tableList.count(); ++var)
@@ -116,13 +117,7 @@ void MainWindow::on_OpenDataDBButton_clicked()
             tableListAction.append(cellAction);
             this->ui->formList->addActions(tableListAction);
         }
-
-//        //创建form
-//        FormWindow* formTable=new  FormWindow(this,filePath);
-//        formTable->setAttribute(Qt::WA_DeleteOnClose);
-//        int cur=ui->formTabWidget->addTab(formTable,QString::asprintf("标签页 %d",ui->formTabWidget->count()));
-//        ui->formTabWidget->setCurrentIndex(cur);
-
+        this->ui->formList->addAction(this->ui->testAction);
     }
 
 }
@@ -131,7 +126,7 @@ void MainWindow::on_OpenDataDBButton_clicked()
 void MainWindow::on_CreateDataButton_clicked()
 {
     //创建数据表
-    QString title="创建数据表";
+    QString title="创建数据库";
     QString curPath;
     QString fliter="*.db";
     QString filePath = QFileDialog::getSaveFileName(this,title,curPath,fliter);
@@ -141,8 +136,6 @@ void MainWindow::on_CreateDataButton_clicked()
     }
     else
     {
-        //Qstring 重载+ 不是更好
-
         QSqlDatabase  dataBase=QSqlDatabase::addDatabase("QSQLITE");
         dataBase.setDatabaseName(filePath);
         if(dataBase.open()==true)
@@ -246,20 +239,71 @@ bool MainWindow::LoadPlugInsManager()
 }
 
 
-void MainWindow::on_funcList_customContextMenuRequested(const QPoint &pos)
+void MainWindow::on_deleteFormAction_triggered()
 {
-   QMenu *menu = new QMenu(this);
 
-   QAction *testAction = new QAction("右键测试", this);
-   menu->addAction(testAction);
-   menu->addAction(ui->FormAdd);
-   menu->exec(QCursor::pos());
+}
+
+void MainWindow::on_copyAction_triggered()
+{
+
 }
 
 
-void MainWindow::on_FormAdd_triggered()
+void MainWindow::on_formAdd_triggered()
 {
     auto result=QMessageBox::information(this,"提示","创建新表");
     //打开表格创建界面 ，表名，列名，类型 int string float enum TableID 。。。
+    if(dbPtr==nullptr)
+    {
+        auto result=QMessageBox::warning(this,"错误","没有打开数据库");
+    }else
+    {
+        QSqlQuery query;
+        bool success=  query.exec("create table automobile"
+                                  "(id int primary key,"
+                                  "attribute varchar,"
+                                  "type varchar,"
+                                  "kind varchar,"
+                                  "nation int,"
+                                  "carnumber int,"
+                                  "elevaltor int)");
+        if(!success)
+        {
+            qDebug("创建表失败");
+        }
+
+        QSqlTableModel *model=new QSqlTableModel(this,db);
+        model->setTable("automobile");
+
+        //创建form
+        FormWindow* formTable=new  FormWindow(this,model);
+        formTable->setAttribute(Qt::WA_DeleteOnClose);
+        int cur=ui->formTabWidget->addTab(formTable,QString::asprintf("标签页 %d",ui->formTabWidget->count()));
+        ui->formTabWidget->setCurrentIndex(cur);
+    }
+
+}
+
+
+void MainWindow::on_funcList_customContextMenuRequested(const QPoint &pos)
+{
+
+}
+
+void MainWindow::on_formList_customContextMenuRequested(const QPoint &pos)
+{
+
+}
+
+
+void MainWindow::on_stackedWidget_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu *menu = new QMenu(this);
+
+    QAction *testAction = new QAction("右键测试", this);
+    menu->addAction(testAction);
+    menu->addAction(ui->formAdd);
+    menu->exec(QCursor::pos());
 }
 
