@@ -6,6 +6,7 @@
 
 #include <QFileDialog>
 #include <QList>
+#include <QMenu>
 #include <QMessageBox>
 #include <QMouseEvent>
 #include <QPushButton>
@@ -104,8 +105,6 @@ void MainWindow::on_OpenDataDBButton_clicked()
         return;
     }else
     {
-
-
         //查询数据表所有表格，并显示在list区域
         auto tableList=   DbInit(filePath);
         QList<QString> list=QList<QString>();
@@ -118,17 +117,11 @@ void MainWindow::on_OpenDataDBButton_clicked()
             this->ui->formList->addActions(tableListAction);
         }
 
-
-
-
-
-
-
-        //创建form
-        FormWindow* formTable=new  FormWindow(this,filePath);
-        formTable->setAttribute(Qt::WA_DeleteOnClose);
-        int cur=ui->formTabWidget->addTab(formTable,QString::asprintf("标签页 %d",ui->formTabWidget->count()));
-        ui->formTabWidget->setCurrentIndex(cur);
+//        //创建form
+//        FormWindow* formTable=new  FormWindow(this,filePath);
+//        formTable->setAttribute(Qt::WA_DeleteOnClose);
+//        int cur=ui->formTabWidget->addTab(formTable,QString::asprintf("标签页 %d",ui->formTabWidget->count()));
+//        ui->formTabWidget->setCurrentIndex(cur);
 
     }
 
@@ -250,5 +243,23 @@ bool MainWindow::LoadPlugInsManager()
     }
 
     return false;
+}
+
+
+void MainWindow::on_funcList_customContextMenuRequested(const QPoint &pos)
+{
+   QMenu *menu = new QMenu(this);
+
+   QAction *testAction = new QAction("右键测试", this);
+   menu->addAction(testAction);
+   menu->addAction(ui->FormAdd);
+   menu->exec(QCursor::pos());
+}
+
+
+void MainWindow::on_FormAdd_triggered()
+{
+    auto result=QMessageBox::information(this,"提示","创建新表");
+    //打开表格创建界面 ，表名，列名，类型 int string float enum TableID 。。。
 }
 

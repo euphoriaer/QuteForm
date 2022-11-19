@@ -40,6 +40,10 @@ private slots:
 
     void on_PluginsManager_clicked();
 
+    void on_funcList_customContextMenuRequested(const QPoint &pos);
+
+    void on_FormAdd_triggered();
+
 private:
     Ui::MainWindow *ui;
     void    DataInit();
