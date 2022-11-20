@@ -252,13 +252,15 @@ void MainWindow::on_copyAction_triggered()
 
 void MainWindow::on_formAdd_triggered()
 {
-    auto result=QMessageBox::information(this,"提示","创建新表");
-    //打开表格创建界面 ，表名，列名，类型 int string float enum TableID 。。。
+
+
     if(dbPtr==nullptr)
     {
         auto result=QMessageBox::warning(this,"错误","没有打开数据库");
     }else
     {
+
+         //打开表格创建界面 ，表名，列名，类型 int string float enum TableID 。。。
         QSqlQuery query;
         bool success=  query.exec("create table automobile"
                                   "(id int primary key,"
@@ -303,7 +305,10 @@ void MainWindow::on_stackedWidget_customContextMenuRequested(const QPoint &pos)
 
     QAction *testAction = new QAction("右键测试", this);
     menu->addAction(testAction);
+
     menu->addAction(ui->formAdd);
+    menu->addAction(ui->copyAction);
+    menu->addAction(ui->deleteFormAction);
     menu->exec(QCursor::pos());
 }
 
