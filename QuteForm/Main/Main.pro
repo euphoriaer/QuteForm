@@ -11,28 +11,37 @@ CONFIG += c++11
 INCLUDEPATH    += ../Plugs/PlugManager
 
 SOURCES += \
+    allformfileshow.cpp \
     basewidget.cpp \
     datamanager.cpp \
     formwindow.cpp \
     hintdialog.cpp \
     main.cpp \
     mainwindow.cpp \
+    nearformshow.cpp \
+    starformshow.cpp \
     tip.cpp
 
 HEADERS += \
+    allformfileshow.h \
     datamanager.h \
+    nearformshow.h \
     pluginsInterface.h \
     basewidget.h \
     formwindow.h \
     hintdialog.h \
     mainwindow.h \
+    starformshow.h \
     tip.h
 
 FORMS += \
+    allformfileshow.ui \
     datamanager.ui \
     formwindow.ui \
     hintdialog.ui \
     mainwindow.ui \
+    nearformshow.ui \
+    starformshow.ui \
     tip.ui
 
 TRANSLATIONS += \

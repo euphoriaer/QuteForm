@@ -1,4 +1,6 @@
 ﻿#include "mainwindow.h"
+#include "allformfileshow.h"
+#include "ui_allformfileshow.h"
 #include "ui_mainwindow.h"
 #include "formwindow.h"
 #include "tip.h"
@@ -39,8 +41,23 @@ MainWindow::MainWindow(QWidget *parent)
     ui->formTabWidget->setCornerWidget(tabButton);
 
     //首页
-    ui->funcList->insertItem(0,tr("最近"));
-    ui->funcList->insertItem(1,tr("星标"));
+    ui->funcList->insertItem(0,tr("全部"));
+    ui->funcList->insertItem(1,tr("最近"));
+    ui->funcList->insertItem(2,tr("星标"));
+
+    forms=new allFormFileShow(this);
+    nearForms=new nearFormShow(this);
+    starForms=new starFormShow(this);
+    for(int i = ui->stackedWidget->count(); i >= 0; i--)
+    {
+        QWidget* widget = ui->stackedWidget->widget(i);
+        ui->stackedWidget->removeWidget(widget);
+        widget->deleteLater();
+    }
+
+    ui->stackedWidget->addWidget(forms);
+    ui->stackedWidget->addWidget(nearForms);
+    ui->stackedWidget->addWidget(starForms);
     //ui->funcList->insertItem(2,ui->testAction);
 
 }
@@ -115,9 +132,10 @@ void MainWindow::on_OpenDataDBButton_clicked()
             auto curTableName=tableList[var];
             QAction *cellAction=new QAction(curTableName,this);
             tableListAction.append(cellAction);
-            this->ui->formList->addActions(tableListAction);
+            forms->ui->formList->addItem(curTableName);
         }
-        this->ui->formList->addAction(this->ui->testAction);
+
+
     }
 
 }
@@ -305,10 +323,16 @@ void MainWindow::on_stackedWidget_customContextMenuRequested(const QPoint &pos)
 
     QAction *testAction = new QAction("右键测试", this);
     menu->addAction(testAction);
-
+    menu->addAction(ui->openFormAction);
     menu->addAction(ui->formAdd);
     menu->addAction(ui->copyAction);
     menu->addAction(ui->deleteFormAction);
     menu->exec(QCursor::pos());
+}
+
+
+void MainWindow::on_funcList_currentRowChanged(int currentRow)
+{
+    ui->stackedWidget->setCurrentIndex(currentRow);
 }
 

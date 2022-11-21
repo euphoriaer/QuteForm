@@ -129,9 +129,6 @@
           </widget>
          </item>
         </layout>
-        <zorder>funcList</zorder>
-        <zorder>stackedWidget</zorder>
-        <zorder>formList</zorder>
        </widget>
       </widget>
      </widget>
@@ -178,6 +175,18 @@
    </property>
    <property name="text">
     <string>测试Action</string>
+   </property>
+  </action>
+  <action name="openFormAction">
+   <property name="icon">
+    <iconset resource="../Resources/icons/Icons.qrc">
+     <normaloff>:/Icons/Document/book-open-line.svg</normaloff>:/Icons/Document/book-open-line.svg</iconset>
+   </property>
+   <property name="text">
+    <string>打开表</string>
+   </property>
+   <property name="toolTip">
+    <string>打开表</string>
    </property>
   </action>
  </widget>

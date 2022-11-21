@@ -5,6 +5,9 @@
 #include <QLabel>
 #include <QMainWindow>
 #include <QSqlDatabase>
+#include <allFormFileShow.h>
+#include <nearFormShow.h>
+#include <starFormShow.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,7 +27,9 @@ public:
     QStringList DbInit(QString filePath);
     QSqlDatabase db;
     QSqlDatabase* dbPtr=nullptr;
-
+    allFormFileShow *forms;
+    nearFormShow *nearForms;
+    starFormShow *starForms;
 private slots:
     void on_formTabWidget_tabCloseRequested(int index);
 
@@ -54,6 +59,8 @@ private slots:
     void on_formList_customContextMenuRequested(const QPoint &pos);
 
     void on_stackedWidget_customContextMenuRequested(const QPoint &pos);
+
+    void on_funcList_currentRowChanged(int currentRow);
 
 private:
     Ui::MainWindow *ui;
