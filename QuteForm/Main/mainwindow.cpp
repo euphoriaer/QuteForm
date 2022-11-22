@@ -15,6 +15,8 @@
 #include <QSqlQuery>
 #include <qpluginloader.h>
 
+#include <ui/createform.h>
+
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -280,6 +282,9 @@ void MainWindow::on_formAdd_triggered()
 
          //打开表格创建界面 ，表名，列名，类型 int string float enum TableID 。。。
         QSqlQuery query;
+        CreateForm *createForm=new CreateForm(this);
+        createForm->show();
+        createForm->exec();
         bool success=  query.exec("create table automobile"
                                   "(id int primary key,"
                                   "attribute varchar,"
@@ -288,6 +293,9 @@ void MainWindow::on_formAdd_triggered()
                                   "nation int,"
                                   "carnumber int,"
                                   "elevaltor int)");
+
+
+
         if(!success)
         {
             qDebug("创建表失败");
@@ -334,5 +342,23 @@ void MainWindow::on_stackedWidget_customContextMenuRequested(const QPoint &pos)
 void MainWindow::on_funcList_currentRowChanged(int currentRow)
 {
     ui->stackedWidget->setCurrentIndex(currentRow);
+}
+
+
+void MainWindow::on_openFormAction_triggered()
+{
+    if(forms->ui->formList->currentItem()==nullptr)
+    {
+        return;
+    }
+    QString tableName=forms->ui->formList->currentItem()->text();
+    QSqlTableModel *model=new QSqlTableModel(this,db);
+    model->setTable(tableName);
+
+    //创建form打开
+    FormWindow* formTable=new  FormWindow(this,model);
+    formTable->setAttribute(Qt::WA_DeleteOnClose);
+    int cur=ui->formTabWidget->addTab(formTable,tableName);
+    ui->formTabWidget->setCurrentIndex(cur);
 }
 

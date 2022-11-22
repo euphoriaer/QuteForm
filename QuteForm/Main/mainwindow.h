@@ -62,6 +62,8 @@ private slots:
 
     void on_funcList_currentRowChanged(int currentRow);
 
+    void on_openFormAction_triggered();
+
 private:
     Ui::MainWindow *ui;
     void    DataInit();

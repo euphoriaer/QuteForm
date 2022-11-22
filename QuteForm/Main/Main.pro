@@ -20,7 +20,8 @@ SOURCES += \
     mainwindow.cpp \
     nearformshow.cpp \
     starformshow.cpp \
-    tip.cpp
+    tip.cpp \
+    ui/createform.cpp
 
 HEADERS += \
     allformfileshow.h \
@@ -32,7 +33,8 @@ HEADERS += \
     hintdialog.h \
     mainwindow.h \
     starformshow.h \
-    tip.h
+    tip.h \
+    ui/createform.h
 
 FORMS += \
     allformfileshow.ui \
@@ -42,7 +44,8 @@ FORMS += \
     mainwindow.ui \
     nearformshow.ui \
     starformshow.ui \
-    tip.ui
+    tip.ui \
+    ui/createform.ui
 
 TRANSLATIONS += \
     QuteForm_zh_CN.ts
