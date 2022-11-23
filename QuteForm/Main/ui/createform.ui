@@ -22,7 +22,7 @@
   <property name="windowTitle">
    <string>创建表</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -84,16 +84,36 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QListView" name="listView"/>
+       <widget class="QScrollArea" name="scrollArea">
+        <property name="lineWidth">
+         <number>1</number>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOn</enum>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustToContents</enum>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>657</width>
+           <height>325</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
       </item>
       <item>
        <widget class="QScrollBar" name="verticalScrollBar">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>

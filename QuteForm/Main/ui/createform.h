@@ -16,6 +16,9 @@ public:
     explicit CreateForm(QWidget *parent = nullptr);
     ~CreateForm();
 
+private slots:
+    void on_verticalScrollBar_valueChanged(int value);
+
 private:
     Ui::CreateForm *ui;
 };
