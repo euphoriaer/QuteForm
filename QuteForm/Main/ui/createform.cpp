@@ -1,4 +1,5 @@
 #include "createform.h"
+#include "createformcell.h"
 #include "ui_createform.h"
 
 #include <QButtonGroup>
@@ -14,28 +15,22 @@ CreateForm::CreateForm(QWidget *parent) :
     ui->textEdit->setAlignment(Qt::AlignCenter);
     QVBoxLayout *vbox = new QVBoxLayout(this);
     QWidget *scroll_inner_curtain=new QWidget();
+
     for (int var = 0; var < 10; ++var)
     {
-        QWidget *listCellGroup=new QWidget();
-        QHBoxLayout *hbox=new QHBoxLayout();
-        listCellGroup->setLayout(hbox);
 
-        QLineEdit *TextEdit=new QLineEdit();
-        TextEdit->setFixedHeight(25);
+        QList<QString> types=QList<QString>();
 
-        QComboBox *comBox=new QComboBox();
-        comBox->setFixedHeight(25);
-        comBox->addItem("int");
-        comBox->addItem("string");
-        comBox->addItem("table id");
-        comBox->addItem("float");
+        types.append(QString("int"));
+        types.append(QString("float"));
+        types.append(QString("string"));
+        types.append(QString("table_id"));
 
-        hbox->addWidget(TextEdit);
-        hbox->addWidget(comBox);
+        CreateFormCell *lisrcell=new CreateFormCell(types);
+        vbox->addWidget(lisrcell->cell_widget);
 
-        vbox->addWidget(listCellGroup);
-        vbox->setSpacing(0);
     }
+    vbox->setSpacing(0);
     scroll_inner_curtain->setLayout(vbox);
     ui->scrollArea->setWidget(scroll_inner_curtain);
     ui->scrollArea->setVerticalScrollBar(ui->verticalScrollBar);
@@ -51,7 +46,14 @@ void CreateForm::on_verticalScrollBar_valueChanged(int value)
 {
     if(value==ui->verticalScrollBar->maximum())
     {
-        ui->verticalScrollBar->setMaximum(value+25);
+        //ui->verticalScrollBar->setMaximum(value+25);
     }
+}
+
+
+void CreateForm::on_pushButton_clicked()
+{
+    isOK=true;
+    //返回
 }
 

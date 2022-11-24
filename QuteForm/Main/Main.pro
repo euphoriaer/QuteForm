@@ -21,7 +21,8 @@ SOURCES += \
     nearformshow.cpp \
     starformshow.cpp \
     tip.cpp \
-    ui/createform.cpp
+    ui/createform.cpp \
+    ui/createformcell.cpp
 
 HEADERS += \
     allformfileshow.h \
@@ -34,7 +35,8 @@ HEADERS += \
     mainwindow.h \
     starformshow.h \
     tip.h \
-    ui/createform.h
+    ui/createform.h \
+    ui/createformcell.h
 
 FORMS += \
     allformfileshow.ui \

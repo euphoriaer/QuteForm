@@ -293,12 +293,9 @@ void MainWindow::on_formAdd_triggered()
                                   "nation int,"
                                   "carnumber int,"
                                   "elevaltor int)");
-
-
-
         if(!success)
         {
-            qDebug("创建表失败");
+            qDebug("创建表失败");   
         }
 
         QSqlTableModel *model=new QSqlTableModel(this,db);
