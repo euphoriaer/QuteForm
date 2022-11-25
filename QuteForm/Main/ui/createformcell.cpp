@@ -26,3 +26,13 @@ CreateFormCell::CreateFormCell(QList<QString> columeTypes,int cellHeight,QWidget
     cell_widget=listGroup;
     listGroup->setLayout(cellBox);
 }
+
+CreateFormCell::CreateFormCell(QObject *temp)
+{
+
+}
+
+CreateFormCell::CreateFormCell()
+{
+
+}

@@ -1,6 +1,8 @@
 #ifndef CREATEFORM_H
 #define CREATEFORM_H
 
+#include "createformcell.h"
+#include "qboxlayout.h"
 #include <QWidget>
 #include <qdialog.h>
 
@@ -17,13 +19,21 @@ public:
     ~CreateForm();
     bool isOK;
     QString tableName;
-    QList<QMap<QString,QString>> tableColumes;
+    QMap<QString,QString> *tableColumes;
+    void CreateCell();
 private slots:
+
+
     void on_verticalScrollBar_valueChanged(int value);
 
     void on_pushButton_clicked();
 
+    void on_verticalScrollBar_sliderMoved(int position);
+
+    void on_pushButton_2_clicked();
+
 private:
+    QVBoxLayout *vbox;
     Ui::CreateForm *ui;
 };
 

@@ -136,8 +136,6 @@ void MainWindow::on_OpenDataDBButton_clicked()
             tableListAction.append(cellAction);
             forms->ui->formList->addItem(curTableName);
         }
-
-
     }
 
 }
@@ -285,21 +283,44 @@ void MainWindow::on_formAdd_triggered()
         CreateForm *createForm=new CreateForm(this);
         createForm->show();
         createForm->exec();
-        bool success=  query.exec("create table automobile"
-                                  "(id int primary key,"
-                                  "attribute varchar,"
-                                  "type varchar,"
-                                  "kind varchar,"
-                                  "nation int,"
-                                  "carnumber int,"
-                                  "elevaltor int)");
+        if(!createForm->isOK)
+        {
+            //点击取消
+            return;
+        }
+
+        QString queryStr="";
+        QString tableName=createForm->tableName;
+        queryStr+="create table "+tableName+"(";
+
+        int i=0;
+        foreach (auto cell, createForm->tableColumes->keys())
+        {
+            auto key=cell;
+            auto Type=createForm->tableColumes->value(cell);
+
+            if(i=0)//默认第一列为主键
+            {
+                queryStr+=key+" "+Type+" primary key,";
+
+            }else
+            {
+                 queryStr+=key+" "+Type+",";
+            }
+            i++;
+        }
+
+        queryStr+=")";
+
+        bool success=  query.exec(queryStr);
+
         if(!success)
         {
             qDebug("创建表失败");   
         }
 
         QSqlTableModel *model=new QSqlTableModel(this,db);
-        model->setTable("automobile");
+        model->setTable(tableName);
 
         //创建form
         FormWindow* formTable=new  FormWindow(this,model);
