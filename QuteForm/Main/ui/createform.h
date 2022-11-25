@@ -19,6 +19,7 @@ public:
     ~CreateForm();
     bool isOK;
     QString tableName;
+    QList<CreateFormCell> cells;
     QMap<QString,QString> *tableColumes;
     void CreateCell();
 private slots:

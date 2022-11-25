@@ -5,17 +5,21 @@
 #include <QWidget>
 #include <qlineedit.h>
 
-class CreateFormCell : public QWidget
+class CreateFormCell
 {
-    Q_OBJECT
+
 public:
-    explicit CreateFormCell(QList<QString> columeTypes,int cellHeight=25,QWidget *parent = nullptr);
-    CreateFormCell(QObject *temp);
-    CreateFormCell();
+    CreateFormCell(QList<QString> columeTypes,int cellHeight=25,QWidget *parent = nullptr);
+
+    QString Name;
+    QString Type;
     QLineEdit *columeName;
     QComboBox *columeType;
     QWidget *cell_widget;
-signals:
+ private:
+
+
+
 
 };
 

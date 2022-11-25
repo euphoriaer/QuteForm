@@ -278,7 +278,7 @@ void MainWindow::on_formAdd_triggered()
     }else
     {
 
-         //打开表格创建界面 ，表名，列名，类型 int string float enum TableID 。。。
+        //打开表格创建界面 ，表名，列名，类型 int string float enum TableID 。。。
         QSqlQuery query;
         CreateForm *createForm=new CreateForm(this);
         createForm->show();
@@ -291,7 +291,7 @@ void MainWindow::on_formAdd_triggered()
 
         QString queryStr="";
         QString tableName=createForm->tableName;
-        queryStr+="create table "+tableName+"(";
+        queryStr+="create table "+tableName+" (";
 
         int i=0;
         foreach (auto cell, createForm->tableColumes->keys())
@@ -299,13 +299,17 @@ void MainWindow::on_formAdd_triggered()
             auto key=cell;
             auto Type=createForm->tableColumes->value(cell);
 
-            if(i=0)//默认第一列为主键
+            if(i==0)//默认第一列为主键
             {
                 queryStr+=key+" "+Type+" primary key,";
 
-            }else
+            }else if(i==createForm->tableColumes->keys().count()-1)
             {
-                 queryStr+=key+" "+Type+",";
+                queryStr+=key+" "+Type;
+            }
+            else
+            {
+                queryStr+=key+" "+Type+",";
             }
             i++;
         }
@@ -316,7 +320,7 @@ void MainWindow::on_formAdd_triggered()
 
         if(!success)
         {
-            qDebug("创建表失败");   
+            qDebug("创建表失败");
         }
 
         QSqlTableModel *model=new QSqlTableModel(this,db);

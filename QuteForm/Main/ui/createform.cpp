@@ -13,7 +13,7 @@ CreateForm::CreateForm(QWidget *parent) :
     ui(new Ui::CreateForm)
 {
     ui->setupUi(this);
-    ui->textEdit->setAlignment(Qt::AlignCenter);
+    ui->tableName->setAlignment(Qt::AlignCenter);
     vbox = new QVBoxLayout(this);
     QWidget *scroll_inner_curtain=new QWidget();
 
@@ -47,9 +47,10 @@ void CreateForm::CreateCell()
     types.append(QString("string"));
     types.append(QString("table_id"));
 
-    CreateFormCell *lisrcell=new CreateFormCell(types,25,vbox->widget());
+    CreateFormCell lisrcell=CreateFormCell(types,25,vbox->widget());
 
-    vbox->addWidget(lisrcell->cell_widget);
+    vbox->addWidget(lisrcell.cell_widget);
+    cells.append(lisrcell);
 
 }
 
@@ -79,25 +80,24 @@ void CreateForm::on_verticalScrollBar_sliderMoved(int position)
 void CreateForm::on_pushButton_2_clicked()
 {
     isOK=true;
+    tableName=ui->tableName->toPlainText();
+    tableColumes=new QMap<QString,QString>();
+    auto count=cells.count();
+    for (int var = 0; var < count; ++var)
+    {
 
-//    tableColumes=new QMap<QString,QString>();
-//    auto count=vbox->count();
-//    for (int var = 0; var < count; ++var)
-//    {
-//        auto item = vbox->itemAt(var);
-//        if (item && item->widget())
-//        {
-//            CreateFormCell cell= (CreateFormCell)item->widget();
-//            auto cellName=cell.columeName->text();
-//            if(cellName.isEmpty()||cellName.isNull())
-//            {
-//                continue;
-//            }
-//            auto cellType=cell.columeType->currentText();
-//            tableColumes->insert(cellName,cellType);
-//        }
 
-//    }
+        CreateFormCell cell= cells.at(var);
+        auto cellName=cell.columeName->text();
+        if(cellName.isEmpty()||cellName.isNull())
+        {
+            continue;
+        }
+        auto cellType=cell.columeType->currentText();
+        tableColumes->insert(cellName,cellType);
+
+
+    }
     this->close();
 }
 

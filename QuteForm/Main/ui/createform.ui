@@ -65,7 +65,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QTextEdit" name="textEdit">
+       <widget class="QTextEdit" name="tableName">
         <property name="font">
          <font>
           <pointsize>30</pointsize>

@@ -4,7 +4,6 @@
 #include <qtextedit.h>
 
 CreateFormCell::CreateFormCell(QList<QString> columeTypes,int cellHeight,QWidget *parent)
-    : QWidget{parent}
 {
     QWidget *listGroup=new QWidget(parent);
 
@@ -27,12 +26,4 @@ CreateFormCell::CreateFormCell(QList<QString> columeTypes,int cellHeight,QWidget
     listGroup->setLayout(cellBox);
 }
 
-CreateFormCell::CreateFormCell(QObject *temp)
-{
 
-}
-
-CreateFormCell::CreateFormCell()
-{
-
-}
