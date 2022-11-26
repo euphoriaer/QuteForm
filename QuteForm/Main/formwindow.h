@@ -27,6 +27,7 @@ public :
     void    DoubleClikTitle(int index);
     void    ShowTabel();
     QStringList DbInit(QString filePath);
+    int CreateRow();
 private slots:
     void on_actExportJson_triggered();
 
@@ -38,6 +39,10 @@ private slots:
 
     void on_RefreshAction_triggered();
 
+    void on_verticalScrollBar_sliderMoved(int position);
+
+    void on_verticalScrollBar_valueChanged(int value);
+
 private:
     Ui::FormWindow *ui;
     QSqlDatabase db;
@@ -46,6 +51,7 @@ private:
     QSqlRelationalTableModel* tableRelationalModel=new  QSqlRelationalTableModel();
     void    DbmodelExport();
     QString curTableName;
+    int lastRecord=0;
 };
 
 #endif // FORMWINDOW_H

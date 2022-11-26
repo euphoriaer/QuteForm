@@ -19,13 +19,14 @@ FormWindow::FormWindow(QWidget *parent,QSqlTableModel *sqlTable) :
 
     tableModel=sqlTable;
 
-
+    tableModel->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     ShowTabel();
 
     //设置表头事件，点击双击表头弹出提示
     auto tableHand= ui->tableView->horizontalHeader();
     tableHand->connect(tableHand,&QHeaderView::sectionDoubleClicked ,this,&FormWindow::DoubleClikTitle);
 
+    ui->tableView->setVerticalScrollBar(ui->verticalScrollBar);
 }
 
 
@@ -46,18 +47,11 @@ void FormWindow::DoubleClikTitle(int index)
 void FormWindow::ShowTabel()
 {
 
-
-//   QString str=QString("SELECT * FROM buff;");
-//   dbModel->setQuery(str);
-//    ui->tableView->setModel(dbModel);
-
-//    tableModel =&curTableModel;
-
     tableModel->select();
 
     QTableView *view =ui->tableView;
     view->setModel(tableModel);
-    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     view->show();
 
 }
@@ -121,10 +115,7 @@ void FormWindow::DbmodelExport()
 void FormWindow::on_actionAddRow_triggered()
 {
     //直接增加一行空数据，View 填写即可
-    qDebug("Add Test");
-
-
-
+    CreateRow();
 
 }
 
@@ -155,5 +146,29 @@ void FormWindow::on_RefreshAction_triggered()
     tableModel->select();
 
 
+}
+
+
+void FormWindow::on_verticalScrollBar_sliderMoved(int position)
+{
+
+}
+
+
+void FormWindow::on_verticalScrollBar_valueChanged(int value)
+{
+    if(value==ui->verticalScrollBar->maximum())
+    {
+       lastRecord =  CreateRow();
+    }
+    //从最后找3条
+}
+
+int FormWindow::CreateRow()
+{
+    auto record= tableModel->record();
+    auto count=tableModel->rowCount();
+    tableModel->insertRecord(count,record);
+    return count;
 }
 

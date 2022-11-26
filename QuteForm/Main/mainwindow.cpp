@@ -349,7 +349,7 @@ void MainWindow::on_formList_customContextMenuRequested(const QPoint &pos)
 
 void MainWindow::on_stackedWidget_customContextMenuRequested(const QPoint &pos)
 {
-    QMenu *menu = new QMenu(this);
+    QMenu *menu = new QMenu();
 
     QAction *testAction = new QAction("右键测试", this);
     menu->addAction(testAction);
