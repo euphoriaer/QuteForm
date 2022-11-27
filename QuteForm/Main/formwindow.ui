@@ -74,28 +74,13 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actExportJson"/>
-   <addaction name="exportScriptaction"/>
-   <addaction name="actionAddRow"/>
+   <addaction name="action"/>
    <addaction name="actionCol"/>
-   <addaction name="actionAddForm"/>
+   <addaction name="submitAction"/>
    <addaction name="RefreshAction"/>
+   <addaction name="separator"/>
   </widget>
-  <action name="actExportJson">
-   <property name="icon">
-    <iconset resource="../Resources/icons/Icons.qrc">
-     <normaloff>:/Icons/Logos/reactjs-line.svg</normaloff>:/Icons/Logos/reactjs-line.svg</iconset>
-   </property>
-   <property name="text">
-    <string>导出Json</string>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
-  </action>
-  <action name="actionAddRow">
+  <action name="action">
    <property name="icon">
     <iconset resource="../Resources/icons/Icons.qrc">
      <normaloff>:/Icons/System/arrow-right-fill.svg</normaloff>:/Icons/System/arrow-right-fill.svg</iconset>
@@ -123,20 +108,6 @@
     </font>
    </property>
   </action>
-  <action name="actionAddForm">
-   <property name="icon">
-    <iconset resource="../Resources/icons/Icons.qrc">
-     <normaloff>:/Icons/Design/grid-line.svg</normaloff>:/Icons/Design/grid-line.svg</iconset>
-   </property>
-   <property name="text">
-    <string>增加表</string>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
-  </action>
   <action name="RefreshAction">
    <property name="icon">
     <iconset resource="../Resources/icons/Icons.qrc">
@@ -151,6 +122,37 @@
     </font>
    </property>
   </action>
+  <action name="actionAddForm">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resources/icons/Icons.qrc">
+     <normaloff>:/Icons/Design/grid-line.svg</normaloff>:/Icons/Design/grid-line.svg</iconset>
+   </property>
+   <property name="text">
+    <string>增加表</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="actExportJson">
+   <property name="icon">
+    <iconset resource="../Resources/icons/Icons.qrc">
+     <normaloff>:/Icons/Logos/reactjs-line.svg</normaloff>:/Icons/Logos/reactjs-line.svg</iconset>
+   </property>
+   <property name="text">
+    <string>导出Json</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+  </action>
   <action name="exportScriptaction">
    <property name="icon">
     <iconset resource="../Resources/icons/Icons.qrc">
@@ -158,6 +160,20 @@
    </property>
    <property name="text">
     <string>导出脚本文件</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="submitAction">
+   <property name="icon">
+    <iconset resource="../Resources/icons/Icons.qrc">
+     <normaloff>:/Icons/System/upload-cloud-line.svg</normaloff>:/Icons/System/upload-cloud-line.svg</iconset>
+   </property>
+   <property name="text">
+    <string>提交</string>
    </property>
    <property name="font">
     <font>

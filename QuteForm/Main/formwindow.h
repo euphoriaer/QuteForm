@@ -43,6 +43,10 @@ private slots:
 
     void on_verticalScrollBar_valueChanged(int value);
 
+    void on_submitAction_triggered();
+
+    void on_action_triggered();
+
 private:
     Ui::FormWindow *ui;
     QSqlDatabase db;

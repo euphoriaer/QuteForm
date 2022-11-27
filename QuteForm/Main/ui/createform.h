@@ -22,8 +22,9 @@ public:
     QList<CreateFormCell> cells;
     QMap<QString,QString> *tableColumes;
     void CreateCell();
+    QVBoxLayout *vbox;
+    Ui::CreateForm *ui;
 private slots:
-
 
     void on_verticalScrollBar_valueChanged(int value);
 
@@ -32,10 +33,6 @@ private slots:
     void on_verticalScrollBar_sliderMoved(int position);
 
     void on_pushButton_2_clicked();
-
-private:
-    QVBoxLayout *vbox;
-    Ui::CreateForm *ui;
 };
 
 #endif // CREATEFORM_H

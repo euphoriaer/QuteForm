@@ -1,4 +1,6 @@
 ﻿#include "formwindow.h"
+#include "qmessagebox.h"
+#include "ui_createform.h"
 #include "ui_formwindow.h"
 #include <QFileDialog>
 #include <QFontComboBox>
@@ -7,18 +9,22 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QList>
+#include <QSqlError>
 #include <QTableView>
 #include <hintdialog.h>
+#include <qdebug.h>
+#include <qsqlquery.h>
+#include <ui/createform.h>
 
 
 FormWindow::FormWindow(QWidget *parent,QSqlTableModel *sqlTable) :
-      QMainWindow(parent),
-      ui(new Ui::FormWindow)
+    QMainWindow(parent),
+    ui(new Ui::FormWindow)
 {
     ui->setupUi(this);
 
     tableModel=sqlTable;
-
+    db=tableModel->database();
     tableModel->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     ShowTabel();
 
@@ -123,8 +129,26 @@ void FormWindow::on_actionAddRow_triggered()
 void FormWindow::on_actionCol_triggered()
 {
     //增加列，弹出对话框，列名
+    CreateForm *createForm=new CreateForm(this);
+    createForm->ui->tableName->setEnabled(false);
+    createForm->exec();
 
+    QString queryStr="";
+    QString tableName=tableModel->tableName();
 
+    QSqlQuery *query=new QSqlQuery(tableModel->database());
+    foreach (auto cell, createForm->tableColumes->keys())
+    {
+        auto key=cell;
+        auto Type=createForm->tableColumes->value(cell);
+        queryStr="ALTER TABLE "+tableName+" ADD COLUMN "+key+" "+Type;
+        bool success= query->exec(queryStr);
+
+        //todo  收集添加失败的列
+    }
+
+    //主动刷新表
+    on_RefreshAction_triggered();
 }
 
 
@@ -142,10 +166,9 @@ void FormWindow::on_RefreshAction_triggered()
 {
     //刷新表格数据  多人协作模块需要，当使用远程数据库时
 
-   //刷新数据表格  Git多人协作时需要，刷新本地Db文件，拉取重读
+    //刷新数据表格  Git多人协作时需要，刷新本地Db文件，拉取重读
+    tableModel->setTable(tableModel->tableName());
     tableModel->select();
-
-
 }
 
 
@@ -159,9 +182,9 @@ void FormWindow::on_verticalScrollBar_valueChanged(int value)
 {
     if(value==ui->verticalScrollBar->maximum())
     {
-       lastRecord =  CreateRow();
+        lastRecord =  CreateRow();
     }
-    //从最后找3条
+
 }
 
 int FormWindow::CreateRow()
@@ -170,5 +193,22 @@ int FormWindow::CreateRow()
     auto count=tableModel->rowCount();
     tableModel->insertRecord(count,record);
     return count;
+}
+
+
+void FormWindow::on_submitAction_triggered()
+{
+    bool success= tableModel->submitAll();
+    if(!success)
+    {
+        QSqlError error=db.lastError();
+        QMessageBox::critical(this,"失败",error.text());
+    }
+}
+
+
+void FormWindow::on_action_triggered()
+{
+    CreateRow();
 }
 
