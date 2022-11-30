@@ -9,11 +9,11 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 INCLUDEPATH    += ../Plugs/PlugManager
+INCLUDEPATH    += ui/form
+INCLUDEPATH    += ui/home
 
 SOURCES += \
-    allformfileshow.cpp \
     basewidget.cpp \
-    datamanager.cpp \
     formwindow.cpp \
     hintdialog.cpp \
     main.cpp \
@@ -21,12 +21,11 @@ SOURCES += \
     nearformshow.cpp \
     starformshow.cpp \
     tip.cpp \
-    ui/createform.cpp \
-    ui/createformcell.cpp
+    createform.cpp \
+    createformcell.cpp\
+    allformfileshow.cpp
 
 HEADERS += \
-    allformfileshow.h \
-    datamanager.h \
     nearformshow.h \
     pluginsInterface.h \
     basewidget.h \
@@ -35,19 +34,18 @@ HEADERS += \
     mainwindow.h \
     starformshow.h \
     tip.h \
-    ui/createform.h \
-    ui/createformcell.h
+    createform.h \
+    createformcell.h\
+    allformfileshow.h
 
 FORMS += \
-    allformfileshow.ui \
-    datamanager.ui \
-    formwindow.ui \
-    hintdialog.ui \
-    mainwindow.ui \
-    nearformshow.ui \
-    starformshow.ui \
-    tip.ui \
-    ui/createform.ui
+    ui/form/formwindow.ui \
+    ui/form/hintdialog.ui \
+    ui/home/mainwindow.ui \
+    ui/home/nearformshow.ui \
+    ui/home/starformshow.ui \
+    ui/home/allformfileshow.ui \
+    ui/form/createform.ui
 
 TRANSLATIONS += \
     QuteForm_zh_CN.ts

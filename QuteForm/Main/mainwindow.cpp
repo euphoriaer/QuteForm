@@ -14,8 +14,7 @@
 #include <QPushButton>
 #include <QSqlQuery>
 #include <qpluginloader.h>
-
-#include <ui/createform.h>
+#include <createform.h>
 
 
 
