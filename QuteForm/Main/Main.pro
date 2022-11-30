@@ -20,7 +20,6 @@ SOURCES += \
     mainwindow.cpp \
     nearformshow.cpp \
     starformshow.cpp \
-    tip.cpp \
     createform.cpp \
     createformcell.cpp\
     allformfileshow.cpp
@@ -33,7 +32,6 @@ HEADERS += \
     hintdialog.h \
     mainwindow.h \
     starformshow.h \
-    tip.h \
     createform.h \
     createformcell.h\
     allformfileshow.h

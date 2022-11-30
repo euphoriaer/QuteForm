@@ -14,7 +14,7 @@
 #include <hintdialog.h>
 #include <qdebug.h>
 #include <qsqlquery.h>
-#include <ui/createform.h>
+#include <createform.h>
 
 
 FormWindow::FormWindow(QWidget *parent,QSqlTableModel *sqlTable) :

@@ -3,7 +3,7 @@
 #include "ui_allformfileshow.h"
 #include "ui_mainwindow.h"
 #include "formwindow.h"
-#include "tip.h"
+
 
 
 #include <QFileDialog>
