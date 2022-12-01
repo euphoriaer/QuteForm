@@ -48,8 +48,6 @@ void FormWindow::DoubleClikTitle(int index)
     dialog->show();
 }
 
-
-
 void FormWindow::ShowTabel()
 {
 
@@ -211,4 +209,7 @@ void FormWindow::on_action_triggered()
 {
     CreateRow();
 }
+
+
+
 
