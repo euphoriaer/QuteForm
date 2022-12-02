@@ -1,4 +1,4 @@
-#include "createform.h"
+﻿#include "createform.h"
 #include "createformcell.h"
 #include "ui_createform.h"
 
@@ -9,8 +9,8 @@
 
 
 CreateForm::CreateForm(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::CreateForm)
+      QDialog(parent),
+      ui(new Ui::CreateForm)
 {
     ui->setupUi(this);
     ui->tableName->setAlignment(Qt::AlignCenter);
@@ -82,20 +82,26 @@ void CreateForm::on_pushButton_2_clicked()
 {
     isOK=true;
     tableName=ui->tableName->toPlainText();
-    tableColumes=new QMap<QString,QString>();
+    tableColumes=new  QList<TableColume>();
     auto count=cells.count();
     for (int var = 0; var < count; ++var)
     {
 
-
         CreateFormCell cell= cells.at(var);
         auto cellName=cell.columeName->text();
+
         if(cellName.isEmpty()||cellName.isNull())
         {
             continue;
         }
+        bool isKey=cell.columeKey->checkState();
         auto cellType=cell.columeType->currentText();
-        tableColumes->insert(cellName,cellType);
+        TableColume* tableColume=new  TableColume();
+        tableColume->columeName=cellName;
+        tableColume->columeType=cellType;
+        tableColume->isKey=isKey;
+
+        tableColumes->append(*tableColume);
 
 
     }

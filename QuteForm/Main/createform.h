@@ -1,4 +1,4 @@
-#ifndef CREATEFORM_H
+﻿#ifndef CREATEFORM_H
 #define CREATEFORM_H
 
 #include "createformcell.h"
@@ -6,9 +6,18 @@
 #include <QWidget>
 #include <qdialog.h>
 
-namespace Ui {
+namespace Ui
+{
 class CreateForm;
 }
+
+class TableColume
+{
+public:
+    QString columeName;
+    QString columeType;
+    bool isKey;
+};
 
 class CreateForm : public QDialog
 {
@@ -20,7 +29,7 @@ public:
     bool isOK;
     QString tableName;
     QList<CreateFormCell> cells;
-    QMap<QString,QString> *tableColumes;
+    QList<TableColume> *tableColumes;
     void CreateCell();
     QVBoxLayout *vbox;
     Ui::CreateForm *ui;
@@ -34,5 +43,7 @@ private slots:
 
     void on_pushButton_2_clicked();
 };
+
+
 
 #endif // CREATEFORM_H

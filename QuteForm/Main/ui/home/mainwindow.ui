@@ -140,7 +140,7 @@
   </widget>
   <action name="formAdd">
    <property name="icon">
-    <iconset resource="../Resources/icons/Icons.qrc">
+    <iconset resource="../../../Resources/icons/Icons.qrc">
      <normaloff>:/Icons/System/add-line.svg</normaloff>:/Icons/System/add-line.svg</iconset>
    </property>
    <property name="text">
@@ -152,7 +152,7 @@
   </action>
   <action name="deleteFormAction">
    <property name="icon">
-    <iconset resource="../Resources/icons/Icons.qrc">
+    <iconset resource="../../../Resources/icons/Icons.qrc">
      <normaloff>:/Icons/System/delete-bin-2-line.svg</normaloff>:/Icons/System/delete-bin-2-line.svg</iconset>
    </property>
    <property name="text">
@@ -164,7 +164,7 @@
   </action>
   <action name="copyAction">
    <property name="icon">
-    <iconset resource="../Resources/icons/Icons.qrc">
+    <iconset resource="../../../Resources/icons/Icons.qrc">
      <normaloff>:/Icons/Document/file-copy-2-fill.svg</normaloff>:/Icons/Document/file-copy-2-fill.svg</iconset>
    </property>
    <property name="text">
@@ -173,7 +173,7 @@
   </action>
   <action name="testAction">
    <property name="icon">
-    <iconset resource="../Resources/icons/Icons.qrc">
+    <iconset resource="../../../Resources/icons/Icons.qrc">
      <normaloff>:/Icons/Health/test-tube-fill.svg</normaloff>:/Icons/Health/test-tube-fill.svg</iconset>
    </property>
    <property name="text">
@@ -182,7 +182,7 @@
   </action>
   <action name="openFormAction">
    <property name="icon">
-    <iconset resource="../Resources/icons/Icons.qrc">
+    <iconset resource="../../../Resources/icons/Icons.qrc">
      <normaloff>:/Icons/Document/book-open-line.svg</normaloff>:/Icons/Document/book-open-line.svg</iconset>
    </property>
    <property name="text">
@@ -194,7 +194,7 @@
   </action>
  </widget>
  <resources>
-  <include location="../Resources/icons/Icons.qrc"/>
+  <include location="../../../Resources/icons/Icons.qrc"/>
  </resources>
  <connections/>
 </ui>

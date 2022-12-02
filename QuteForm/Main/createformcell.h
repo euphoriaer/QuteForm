@@ -1,7 +1,8 @@
-#ifndef CREATEFORMCELL_H
+﻿#ifndef CREATEFORMCELL_H
 #define CREATEFORMCELL_H
 
 #include "qcombobox.h"
+#include "qcheckbox.h"
 #include <QWidget>
 #include <qlineedit.h>
 
@@ -13,8 +14,10 @@ public:
 
     QString Name;
     QString Type;
+    bool   IsKey;
     QLineEdit *columeName;
     QComboBox *columeType;
+    QCheckBox *columeKey;
     QWidget *cell_widget;
  private:
 

@@ -135,7 +135,7 @@ void FormWindow::on_actionCol_triggered()
     QString tableName=tableModel->tableName();
 
     QSqlQuery *query=new QSqlQuery(tableModel->database());
-    foreach (auto cell, createForm->tableColumes->keys())
+    foreach (TableColume cell, createForm->tableColumes)
     {
         auto key=cell;
         auto Type=createForm->tableColumes->value(cell);
