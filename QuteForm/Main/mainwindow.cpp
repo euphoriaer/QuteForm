@@ -15,12 +15,12 @@
 #include <QSqlQuery>
 #include <qpluginloader.h>
 #include <createform.h>
-
+#include <TableColume.h>
 
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+      , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
@@ -293,25 +293,35 @@ void MainWindow::on_formAdd_triggered()
         queryStr+="create table "+tableName+" (";
 
         int i=0;
-        foreach (auto cell, createForm->tableColumes->keys())
+
+        for (TableColume cell : *createForm->tableColumes)
         {
             auto key=cell;
-            auto Type=createForm->tableColumes->value(cell);
-
-            if(i==0)//默认第一列为主键
+            auto name=cell.columeName;
+            auto type=cell.columeType;
+            bool isKey=cell.isKey;
+            if(isKey)//主键
             {
-                queryStr+=key+" "+Type+" primary key,";
+                queryStr+=name+" "+type+" primary key";
 
-            }else if(i==createForm->tableColumes->keys().count()-1)
-            {
-                queryStr+=key+" "+Type;
             }
             else
             {
-                queryStr+=key+" "+Type+",";
+                queryStr+=name+" "+type;
+            }
+
+            if  (i!=createForm->tableColumes->count()-1)//最后一行，不带，
+            {
+                queryStr+=",";
             }
             i++;
+
         }
+
+        //        foreach (TableColume cell, createForm->tableColumes)
+        //        {
+
+        //        }
 
         queryStr+=")";
 
@@ -319,17 +329,20 @@ void MainWindow::on_formAdd_triggered()
 
         if(!success)
         {
-            qDebug("创建表失败");
+            QMessageBox::critical(this,"错误","创建表失败,请检查字段"); //todo 将queryStr 展示
+        }else
+        {
+            QSqlTableModel *model=new QSqlTableModel(this,db);
+            model->setTable(tableName);
+
+            //创建form
+            FormWindow* formTable=new  FormWindow(this,model);
+            formTable->setAttribute(Qt::WA_DeleteOnClose);
+            int cur=ui->formTabWidget->addTab(formTable,QString::asprintf("标签页 %d",ui->formTabWidget->count()));
+            ui->formTabWidget->setCurrentIndex(cur);
         }
 
-        QSqlTableModel *model=new QSqlTableModel(this,db);
-        model->setTable(tableName);
 
-        //创建form
-        FormWindow* formTable=new  FormWindow(this,model);
-        formTable->setAttribute(Qt::WA_DeleteOnClose);
-        int cur=ui->formTabWidget->addTab(formTable,QString::asprintf("标签页 %d",ui->formTabWidget->count()));
-        ui->formTabWidget->setCurrentIndex(cur);
     }
 
 }

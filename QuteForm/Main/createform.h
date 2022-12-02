@@ -4,20 +4,13 @@
 #include "createformcell.h"
 #include "qboxlayout.h"
 #include <QWidget>
+#include <TableColume.h>
 #include <qdialog.h>
 
 namespace Ui
 {
 class CreateForm;
 }
-
-class TableColume
-{
-public:
-    QString columeName;
-    QString columeType;
-    bool isKey;
-};
 
 class CreateForm : public QDialog
 {

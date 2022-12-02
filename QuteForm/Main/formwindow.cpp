@@ -15,7 +15,7 @@
 #include <qdebug.h>
 #include <qsqlquery.h>
 #include <createform.h>
-
+#include <TableColume.h>
 
 FormWindow::FormWindow(QWidget *parent,QSqlTableModel *sqlTable) :
     QMainWindow(parent),
@@ -135,15 +135,21 @@ void FormWindow::on_actionCol_triggered()
     QString tableName=tableModel->tableName();
 
     QSqlQuery *query=new QSqlQuery(tableModel->database());
-    foreach (TableColume cell, createForm->tableColumes)
+
+    for (TableColume cell : *createForm->tableColumes)
     {
-        auto key=cell;
-        auto Type=createForm->tableColumes->value(cell);
-        queryStr="ALTER TABLE "+tableName+" ADD COLUMN "+key+" "+Type;
+        auto name=cell.columeName;
+        auto type=cell.columeType;
+        queryStr="ALTER TABLE "+tableName+" ADD COLUMN "+name+" "+type;
         bool success= query->exec(queryStr);
 
         //todo  收集添加失败的列
     }
+
+//    foreach (TableColume cell, createForm->tableColumes)
+//    {
+
+//    }
 
     //主动刷新表
     on_RefreshAction_triggered();
